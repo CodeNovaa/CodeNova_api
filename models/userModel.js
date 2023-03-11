@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Please tell us your name"],
+    maxlength: 20,
     unique: true,
   },
   email: {
@@ -17,12 +18,54 @@ const userSchema = new mongoose.Schema({
   },
   photo: {
     type: String,
-    default: "default.jpg",
+    default:
+      "http://res.cloudinary.com/df4t1zu7e/image/upload/v1678403577/i9refylv9btn7xrb69gd.jpg",
   },
   role: {
     type: String,
     enum: ["user", "admin"],
     default: "user",
+  },
+  friends: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  friendsRequest: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  githubHandle: {
+    type: String,
+    unique: true,
+  },
+  codeforcesHandle: {
+    type: String,
+    unique: true,
+  },
+  codeforcesRating: {
+    type: String,
+  },
+  codechefHandle: { type: String, unique: true },
+  leetcodeHandle: {
+    type: String,
+    unique: true,
+  },
+  leetcodeQuestion: {
+    type: String,
+  },
+  gfgHandle: {
+    type: String,
+    unique: true,
+  },
+  college: {
+    type: String,
+  },
+  techStack: {
+    type: String,
   },
   password: {
     type: String,
